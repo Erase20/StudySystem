@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.NoteMapper">
+
+    <sql id="Base_Column_List">
+        id, user_id, course_id, course_name, title, content, video_time, create_time, update_time
+    </sql>
+
+    <select id="selectById" resultType="com.example.entity.Note">
+        select <include refid="Base_Column_List" /> from note where id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="com.example.entity.Note">
+        select note.*, user.name as userName from note
+        left join user on note.user_id = user.id
+        <where>
+            <if test="userId != null"> and note.user_id = #{userId}</if>
+            <if test="courseId != null"> and note.course_id = #{courseId}</if>
+        </where>
+        order by note.create_time desc
+    </select>
+
+    <insert id="insert" parameterType="com.example.entity.Note" useGeneratedKeys="true">
+        insert into note
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="courseId != null">course_id,</if>
+            <if test="courseName != null">course_name,</if>
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="videoTime != null">video_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="courseId != null">#{courseId},</if>
+            <if test="courseName != null">#{courseName},</if>
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="videoTime != null">#{videoTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Note">
+        update note
+        <set>
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="videoTime != null">video_time = #{videoTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from note where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,37 @@
+server:
+  port: 9090
+
+# 数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root   #你本地的数据库用户名
+    password:  root #你本地的数据库密码
+    url: jdbc:mysql://localhost:3306/manager?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+# 配置mybatis实体和xml映射
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+# 分页
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+alipay:
+  appId: 9021000136689400
+  appPrivateKey: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCgVn2MQ9ELvuWHkuz//YCgAmUf/NTUvFmqO2VZn/y3DeC18zyUuhBlb/ilODCBhEzA3A0FcULkXJkYnmlpYpWmq3L2neZJRdkYZwIQYkUIOkYlZBjca9p3zgAaF6LYlEaI8amfVHSb9rlrbIvf+3Q3OWzjThCZpX3Bb9BLNu9MZBz3M+X+wSALIbnBoQgSHlZC+IThqG7+fDEs8ERObJuCCnIDy541GBTVlvIofUXUYcKYd7CYGQyVRy3VYUSY2sTDwvh7+JzZypsWnY2VHV6Tv5mQtIw2dZWfA+kQfpngByyOe9MO7LHzUBhqMfhP/DwNlsl+L1yj5KvN1BkG3qr3AgMBAAECggEAblaW12vj9B1Of1nQ1ulxFqwPQ1AOdseXPNrbCC5dDuvx88SLsB3LIsNHbQuZ9cdBuoa0P0aOLfC7OoHpMKizK5tY5fYLf+kdWPmqJfQ6ZUsU8q5LnYRrN37/+vTBECIZ2CvV+tt308yaFR8BswWsGETgdhxGuDV2sSNtSBVp4Dr8Z0zqAaWIf2IRQmeGOAy7YFtUNjnHDVnIuRSiEfBickUXEPPSdqXEM7P5zBuG88f4lTLg2RcED2KbY+S67pgNkls5pSR0qI+MtZfhVhu4dNxhew5JT4K/5go0Vlf3m6cQMFYcurRW18LfmacwL+Rs+If+4W1GT+C4Co9BFxaPAQKBgQDhzVDcCIMYxAny1eCPmMOc5VF7PfbwyPcKHQ5qDKLg/2dRk2oj+uLcnj9lqYwPNWh3rCkbegl5jsdvrCQnB08L8hNaBuWylBQpyebBn2ysi81lHoADmqQcSqAzBggyNkscGDoTSg6vEK7qFp3+buNW94LTHtwZ5vHJYdGp6fA61wKBgQC1x+gpsGduLAlbC9o28xUXPsfpUj0lEuPd0mOd9dkkpD5O+QyQTi/j8v+mG1PTsuRss52KCZq0Y2SjzxlLJDn7jvOB2MhjAyPfuxSHibiyHlnuYaG+OlhM2Is/+KMlRoVYjdWZQavNL+h0tZSCtJd+XOmTR3vngKB3JPggvpIs4QKBgF+P3SDCGXlpviwfiCI9rMvB4XIfD1toMeT91xPatTQz4y4LDWiczVZBQuNrlfL5z3SWT+9o/omLe6wvVj2OQk3z7Wy0bpHdSYtF/3sCVaPQpuScu+DKmZm/m3z8mItnnvIM7scrGHvOu7gmSkdb9qrfpWZkMRJlQv7Pf0RB1YGRAoGAN6bcDOdUwwX4V0dppykEa/lseqIS1ibSXDbtCI8by3v9F3BnyEYno0HhwpjbMRSzmhPjRz9pfZBwXzYoKDkPB1TceARGVQnBEd3Uiyo+wUlJfxGk0vhJ0Dz7ZLpaOC8+472Ih0Lztf3UzOZKcTmYp7cKS2y3Ikje15sZ2+x8FAECgYA0bbxDmdvEXMquAKXTynP7Kk2MeHcJ4QT+Po2gZ8chwsE10o9bMVSKqcFTeZieTxaepBBo7glehxTB7wLlzqMDeZ62hXJPtTPn7OKBN5HAg/xUu5LoVD5mLf0lzEedqXTKOCri3DDzPDWuyy92QiK0JwwqGw1uFVlr9XZSoUwV1A==
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkW9XrxiVoQ4EkJyqWFOH3J3pMZuzujh34l+j3OoJAHEBzLP8e8fr+Z8ENXwEdMlAK8KfPPbd8++Vjd9cxUGomfeU2lbEV2EW8cZbqaoXQKqEhVy6YF53X2bdJVGPW6jlv2vmjuCULh3LDJPVXBDE092PA+LQgeHAvyj2rLudrAKyRklfCGhVLFmCSO1CINUw6hN7F+zhMZ9pirBWYTBE3eLrRQLurUZ8G06+22vqFEHK/BZChBMUH5ximvRuQBvqdz6hoLlQ5pIIcVsor4US37Zl60l7JzaJz3j/NZDHYNRQTmnpcu9D8kIWJ31VKn+GAnYlZnZAHQl8rgB7dKii7wIDAQAB
+  notifyUrl: http://rmxysj.natappfree.cc/alipay/notify
+
+ip: localhost

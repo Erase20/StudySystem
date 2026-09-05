@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserClusterMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.UserCluster">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="cluster_label" property="clusterLabel"/>
+        <result column="cluster_name" property="clusterName"/>
+        <result column="features_json" property="featuresJson"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="WithUserResultMap" type="com.example.entity.UserCluster" extends="BaseResultMap">
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar" property="userAvatar"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, cluster_label, cluster_name, features_json, update_time
+    </sql>
+
+    <insert id="insert" parameterType="com.example.entity.UserCluster" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_cluster (user_id, cluster_label, cluster_name, features_json, update_time)
+        VALUES (#{userId}, #{clusterLabel}, #{clusterName}, #{featuresJson}, #{updateTime})
+    </insert>
+
+    <delete id="clearAll">
+        DELETE FROM user_cluster
+    </delete>
+
+    <delete id="deleteById">
+        DELETE FROM user_cluster WHERE id = #{id}
+    </delete>
+
+    <update id="updateById" parameterType="com.example.entity.UserCluster">
+        UPDATE user_cluster
+        <set>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="clusterLabel != null">cluster_label = #{clusterLabel},</if>
+            <if test="clusterName != null">cluster_name = #{clusterName},</if>
+            <if test="featuresJson != null">features_json = #{featuresJson},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM user_cluster WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM user_cluster
+        <where>
+            <if test="userId != null">AND user_id = #{userId}</if>
+            <if test="clusterLabel != null">AND cluster_label = #{clusterLabel}</if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectAllWithUser" resultMap="WithUserResultMap">
+        SELECT uc.*, u.name as user_name, u.avatar as user_avatar
+        FROM user_cluster uc
+        LEFT JOIN user u ON uc.user_id = u.id
+        <where>
+            <if test="clusterLabel != null">AND uc.cluster_label = #{clusterLabel}</if>
+        </where>
+        ORDER BY uc.id DESC
+    </select>
+
+</mapper>

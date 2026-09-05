@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.LearningRecordMapper">
+
+    <sql id="Base_Column_List">
+        id, user_id, course_id, course_name, course_type, duration, progress, last_position, create_time, update_time
+    </sql>
+
+    <select id="selectById" resultType="com.example.entity.LearningRecord">
+        select <include refid="Base_Column_List" /> from learning_record where id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="com.example.entity.LearningRecord">
+        select <include refid="Base_Column_List" /> from learning_record
+        <where>
+            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="courseId != null"> and course_id = #{courseId}</if>
+        </where>
+        order by update_time desc
+    </select>
+
+    <insert id="insert" parameterType="com.example.entity.LearningRecord" useGeneratedKeys="true">
+        insert into learning_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="courseId != null">course_id,</if>
+            <if test="courseName != null">course_name,</if>
+            <if test="courseType != null">course_type,</if>
+            <if test="duration != null">duration,</if>
+            <if test="progress != null">progress,</if>
+            <if test="lastPosition != null">last_position,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="courseId != null">#{courseId},</if>
+            <if test="courseName != null">#{courseName},</if>
+            <if test="courseType != null">#{courseType},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="progress != null">#{progress},</if>
+            <if test="lastPosition != null">#{lastPosition},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.LearningRecord">
+        update learning_record
+        <set>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="progress != null">progress = #{progress},</if>
+            <if test="lastPosition != null">last_position = #{lastPosition},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from learning_record where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CommentSentimentMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.CommentSentiment">
+        <id column="id" property="id"/>
+        <result column="comment_id" property="commentId"/>
+        <result column="sentiment_score" property="sentimentScore"/>
+        <result column="sentiment_label" property="sentimentLabel"/>
+        <result column="positive_words" property="positiveWords"/>
+        <result column="negative_words" property="negativeWords"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="WithCommentResultMap" type="com.example.entity.CommentSentiment" extends="BaseResultMap">
+        <result column="comment_content" property="commentContent"/>
+        <result column="user_name" property="userName"/>
+        <result column="course_name" property="courseName"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, comment_id, sentiment_score, sentiment_label, positive_words, negative_words, update_time
+    </sql>
+
+    <insert id="insert" parameterType="com.example.entity.CommentSentiment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comment_sentiment (comment_id, sentiment_score, sentiment_label, positive_words, negative_words, update_time)
+        VALUES (#{commentId}, #{sentimentScore}, #{sentimentLabel}, #{positiveWords}, #{negativeWords}, #{updateTime})
+    </insert>
+
+    <delete id="clearAll">
+        DELETE FROM comment_sentiment
+    </delete>
+
+    <delete id="deleteById">
+        DELETE FROM comment_sentiment WHERE id = #{id}
+    </delete>
+
+    <update id="updateById" parameterType="com.example.entity.CommentSentiment">
+        UPDATE comment_sentiment
+        <set>
+            <if test="commentId != null">comment_id = #{commentId},</if>
+            <if test="sentimentScore != null">sentiment_score = #{sentimentScore},</if>
+            <if test="sentimentLabel != null">sentiment_label = #{sentimentLabel},</if>
+            <if test="positiveWords != null">positive_words = #{positiveWords},</if>
+            <if test="negativeWords != null">negative_words = #{negativeWords},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM comment_sentiment WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM comment_sentiment
+        <where>
+            <if test="commentId != null">AND comment_id = #{commentId}</if>
+            <if test="sentimentLabel != null">AND sentiment_label = #{sentimentLabel}</if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectAllWithComment" resultMap="WithCommentResultMap">
+        SELECT cs.*, c.content as comment_content, u.name as user_name, co.name as course_name
+        FROM comment_sentiment cs
+        LEFT JOIN comment c ON cs.comment_id = c.id
+        LEFT JOIN user u ON c.user_id = u.id
+        LEFT JOIN course co ON c.course_id = co.id
+        <where>
+            <if test="sentimentLabel != null">AND cs.sentiment_label = #{sentimentLabel}</if>
+        </where>
+        ORDER BY cs.id DESC
+    </select>
+
+    <select id="selectCourseSentimentRank" resultType="java.util.HashMap">
+        SELECT
+            co.id as courseId,
+            co.name as courseName,
+            co.img as courseImg,
+            COUNT(*) as commentCount,
+            ROUND(AVG(cs.sentiment_score), 4) as avgScore,
+            SUM(CASE WHEN cs.sentiment_label = '正面' THEN 1 ELSE 0 END) as positiveCount,
+            SUM(CASE WHEN cs.sentiment_label = '负面' THEN 1 ELSE 0 END) as negativeCount,
+            SUM(CASE WHEN cs.sentiment_label = '中性' THEN 1 ELSE 0 END) as neutralCount
+        FROM comment_sentiment cs
+        LEFT JOIN comment c ON cs.comment_id = c.id
+        LEFT JOIN course co ON c.course_id = co.id
+        WHERE co.id IS NOT NULL
+        GROUP BY co.id, co.name, co.img
+        HAVING COUNT(*) >= 1
+        ORDER BY avgScore DESC
+        <if test="limit != null">LIMIT #{limit}</if>
+    </select>
+
+</mapper>

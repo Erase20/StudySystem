@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>用例图 - 在线学习管理系统</title>
+<style>
+  body { margin: 0; padding: 30px; background: #fff; font-family: SimHei, "Microsoft YaHei", sans-serif; }
+  h1 { text-align: center; font-size: 22px; color: #222; margin-bottom: 40px; }
+  .diagram-section { margin-bottom: 60px; text-align: center; }
+  .diagram-section h2 { font-size: 17px; color: #333; margin-bottom: 20px; font-weight: 600; }
+  svg { display: block; margin: 0 auto; }
+</style>
+</head>
+<body>
+<h1>系统用例图</h1>
+
+<!-- ==================== 用户（学员）用例图 ==================== -->
+<div class="diagram-section">
+<h2>用户（学员）用例图</h2>
+<svg viewBox="0 0 560 430" width="780" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ===== 连线（先画，在最底层） ===== -->
+  <g stroke="#999" stroke-width="1.2" fill="none">
+    <!-- 左列 -->
+    <line x1="62" y1="212" x2="230" y2="80"/>
+    <line x1="62" y1="212" x2="230" y2="140"/>
+    <line x1="62" y1="212" x2="230" y2="200"/>
+    <line x1="62" y1="212" x2="230" y2="260"/>
+    <line x1="62" y1="212" x2="230" y2="320"/>
+    <!-- 右列 -->
+    <line x1="62" y1="212" x2="400" y2="80"/>
+    <line x1="62" y1="212" x2="400" y2="140"/>
+    <line x1="62" y1="212" x2="400" y2="200"/>
+    <line x1="62" y1="212" x2="400" y2="260"/>
+    <line x1="62" y1="212" x2="400" y2="320"/>
+  </g>
+
+  <!-- ===== 参与者（学员） ===== -->
+  <g>
+    <circle cx="55" cy="192" r="13" fill="none" stroke="#222" stroke-width="2"/>
+    <line x1="55" y1="205" x2="55" y2="240" stroke="#222" stroke-width="2"/>
+    <line x1="35" y1="218" x2="75" y2="218" stroke="#222" stroke-width="2"/>
+    <line x1="55" y1="240" x2="40" y2="265" stroke="#222" stroke-width="2"/>
+    <line x1="55" y1="240" x2="70" y2="265" stroke="#222" stroke-width="2"/>
+    <text x="55" y="283" text-anchor="middle" font-size="14" fill="#222" font-weight="600">学员</text>
+  </g>
+
+  <!-- ===== 左列用例 ===== -->
+  <g>
+    <ellipse cx="230" cy="80" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="230" y="85" text-anchor="middle" font-size="13" fill="#222">浏览课程</text>
+
+    <ellipse cx="230" cy="140" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="230" y="145" text-anchor="middle" font-size="13" fill="#222">学习章节</text>
+
+    <ellipse cx="230" cy="200" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="230" y="205" text-anchor="middle" font-size="13" fill="#222">查看学习记录</text>
+
+    <ellipse cx="230" cy="260" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="230" y="265" text-anchor="middle" font-size="13" fill="#222">发表评论</text>
+
+    <ellipse cx="230" cy="320" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="230" y="325" text-anchor="middle" font-size="13" fill="#222">每日签到</text>
+  </g>
+
+  <!-- ===== 右列用例 ===== -->
+  <g>
+    <ellipse cx="400" cy="80" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="400" y="85" text-anchor="middle" font-size="13" fill="#222">学习分析</text>
+
+    <ellipse cx="400" cy="140" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="400" y="145" text-anchor="middle" font-size="13" fill="#222">下载资料</text>
+
+    <ellipse cx="400" cy="200" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="400" y="205" text-anchor="middle" font-size="13" fill="#222">管理个人信息</text>
+
+    <ellipse cx="400" cy="260" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="400" y="265" text-anchor="middle" font-size="13" fill="#222">查看订单</text>
+
+    <ellipse cx="400" cy="320" rx="72" ry="21" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="400" y="325" text-anchor="middle" font-size="13" fill="#222">积分兑换</text>
+  </g>
+
+
+</svg>
+</div>
+
+<!-- ==================== 管理员用例图 ==================== -->
+<div class="diagram-section">
+<h2>管理员用例图</h2>
+<svg viewBox="0 0 490 670" width="680" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ===== 连线 ===== -->
+  <g stroke="#999" stroke-width="1.2" fill="none">
+    <line x1="62" y1="325" x2="290" y2="70"/>
+    <line x1="62" y1="325" x2="290" y2="140"/>
+    <line x1="62" y1="325" x2="290" y2="210"/>
+    <line x1="62" y1="325" x2="290" y2="280"/>
+    <line x1="62" y1="325" x2="290" y2="350"/>
+    <line x1="62" y1="325" x2="290" y2="420"/>
+    <line x1="62" y1="325" x2="290" y2="490"/>
+    <line x1="62" y1="325" x2="290" y2="560"/>
+    <line x1="62" y1="325" x2="290" y2="630"/>
+  </g>
+
+  <!-- ===== 参与者（管理员） ===== -->
+  <g>
+    <circle cx="55" cy="305" r="13" fill="none" stroke="#222" stroke-width="2"/>
+    <line x1="55" y1="318" x2="55" y2="353" stroke="#222" stroke-width="2"/>
+    <line x1="35" y1="331" x2="75" y2="331" stroke="#222" stroke-width="2"/>
+    <line x1="55" y1="353" x2="40" y2="378" stroke="#222" stroke-width="2"/>
+    <line x1="55" y1="353" x2="70" y2="378" stroke="#222" stroke-width="2"/>
+    <text x="55" y="396" text-anchor="middle" font-size="14" fill="#222" font-weight="600">管理员</text>
+  </g>
+
+  <!-- ===== 用例 ===== -->
+  <g>
+    <ellipse cx="290" cy="70" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="75" text-anchor="middle" font-size="13" fill="#222">课程管理</text>
+
+    <ellipse cx="290" cy="140" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="145" text-anchor="middle" font-size="13" fill="#222">章节管理</text>
+
+    <ellipse cx="290" cy="210" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="215" text-anchor="middle" font-size="13" fill="#222">用户管理</text>
+
+    <ellipse cx="290" cy="280" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="285" text-anchor="middle" font-size="13" fill="#222">订单管理</text>
+
+    <ellipse cx="290" cy="350" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="355" text-anchor="middle" font-size="13" fill="#222">资讯管理</text>
+
+    <ellipse cx="290" cy="420" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="425" text-anchor="middle" font-size="13" fill="#222">通知公告管理</text>
+
+    <ellipse cx="290" cy="490" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="495" text-anchor="middle" font-size="13" fill="#222">评论情感分析</text>
+
+    <ellipse cx="290" cy="560" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="565" text-anchor="middle" font-size="13" fill="#222">用户聚类分析</text>
+
+    <ellipse cx="290" cy="630" rx="80" ry="22" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    <text x="290" y="635" text-anchor="middle" font-size="13" fill="#222">数据统计</text>
+  </g>
+
+
+</svg>
+</div>
+
+</body>
+</html>

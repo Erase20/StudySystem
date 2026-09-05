@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ChapterMapper">
+
+    <sql id="Base_Column_List">
+        id,course_id,title,sort_order,type,video,duration,free_preview
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.Chapter">
+        select
+        <include refid="Base_Column_List" />
+        from chapter
+        <where>
+            <if test="courseId != null"> and course_id = #{courseId}</if>
+            <if test="title != null"> and title like concat('%', #{title}, '%')</if>
+        </where>
+        order by sort_order asc
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.Chapter">
+        select
+        <include refid="Base_Column_List" />
+        from chapter
+        where id = #{id}
+    </select>
+
+    <select id="selectByCourseId" resultType="com.example.entity.Chapter">
+        select
+        <include refid="Base_Column_List" />
+        from chapter
+        where course_id = #{courseId}
+        order by sort_order asc
+    </select>
+
+    <delete id="deleteById">
+        delete from chapter where id = #{id}
+    </delete>
+
+    <delete id="deleteByCourseId">
+        delete from chapter where course_id = #{courseId}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.Chapter" useGeneratedKeys="true">
+        insert into chapter
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="courseId != null">course_id,</if>
+            <if test="title != null">title,</if>
+            <if test="sortOrder != null">sort_order,</if>
+            <if test="type != null">type,</if>
+            <if test="video != null">video,</if>
+            <if test="duration != null">duration,</if>
+            <if test="freePreview != null">free_preview,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="courseId != null">#{courseId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="sortOrder != null">#{sortOrder},</if>
+            <if test="type != null">#{type},</if>
+            <if test="video != null">#{video},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="freePreview != null">#{freePreview},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Chapter">
+        update chapter
+        <set>
+            <if test="courseId != null">course_id = #{courseId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="freePreview != null">free_preview = #{freePreview},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

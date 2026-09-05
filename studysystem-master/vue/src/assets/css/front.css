@@ -1,0 +1,306 @@
+/* ===== 全局主题色 ===== */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary: #64748b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --bg-light: #f8fafc;
+    --bg-dark: #1e293b;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+}
+
+/* ===== 公告栏 ===== */
+.front-notice {
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 13px;
+    background: var(--bg-dark);
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+.front-notice i {
+    margin-right: 8px;
+}
+
+/* ===== 顶部导航 ===== */
+.front-header {
+    display: flex;
+    height: 64px;
+    line-height: 64px;
+    background: #fff;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.front-header-left {
+    width: 320px;
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+}
+.front-header-left img, .front-header-dropdown img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+}
+.front-header-left .title {
+    flex: 1;
+    color: var(--text-primary);
+    cursor: pointer;
+    margin-left: 12px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.front-header-center {
+    flex: 1;
+    overflow: hidden !important;
+}
+.front-header-right {
+    width: 200px;
+    padding-right: 24px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+.front-header-right .el-button {
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.front-header-right .el-button:first-child {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+.front-header-right .el-button:first-child:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.front-header-right .el-button:last-child {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+}
+.front-header-right .el-button:last-child:hover {
+    background: var(--primary-dark);
+}
+.front-header-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.front-header-dropdown:hover {
+    background: var(--bg-light);
+}
+.el-dropdown-menu {
+    width: 160px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 4px 0 !important;
+}
+.el-dropdown-menu__item {
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+    color: var(--text-primary) !important;
+}
+.el-dropdown-menu__item:hover {
+    background-color: var(--bg-light) !important;
+    color: var(--primary) !important;
+}
+
+/* ===== 导航菜单 ===== */
+.el-menu.el-menu--horizontal {
+    border: none !important;
+    height: 63px;
+    background: transparent !important;
+}
+.el-menu-item {
+    background-color: transparent !important;
+    color: var(--text-secondary) !important;
+    font-size: 15px;
+    padding: 0 20px;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent !important;
+    height: 63px !important;
+    line-height: 63px !important;
+}
+.el-menu-item i {
+    margin-right: 4px;
+}
+.el-menu-item:hover {
+    color: var(--primary) !important;
+    background-color: transparent !important;
+}
+.el-menu {
+    background-color: transparent !important;
+}
+.el-menu-item.is-active {
+    color: var(--primary) !important;
+    font-weight: 500;
+    border-bottom: 2px solid var(--primary) !important;
+    background-color: transparent !important;
+}
+
+/* ===== 主内容区 ===== */
+.main-content {
+    width: 100%;
+    margin: 0 auto;
+    background: var(--bg-light);
+    min-height: calc(100vh - 100px);
+}
+
+.overflowShow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== 课程卡片 ===== */
+.course-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+}
+.course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.course-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+.course-card-body {
+    padding: 14px;
+}
+.course-card-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.course-card-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--danger);
+}
+.course-card-price.free {
+    color: var(--success);
+}
+
+/* ===== 推荐大卡片 ===== */
+.recommend-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.recommend-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.recommend-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+/* ===== 区块标题 ===== */
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    position: relative;
+    padding-left: 14px;
+}
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+/* ===== 功能按钮组 ===== */
+.func-btn-group .el-button {
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.func-btn-group .el-button--primary {
+    background: var(--primary);
+    border: none;
+}
+.func-btn-group .el-button--primary:hover {
+    background: var(--primary-dark);
+}
+.func-btn-group .el-button--success {
+    background: var(--success);
+    border: none;
+}
+.func-btn-group .el-button--success:hover {
+    opacity: 0.9;
+}
+.func-btn-group .el-button--warning {
+    background: var(--warning);
+    border: none;
+}
+.func-btn-group .el-button--warning:hover {
+    opacity: 0.9;
+}
+
+/* ===== 签到按钮 ===== */
+.signin-btn {
+    background: var(--success);
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+.signin-btn:hover {
+    opacity: 0.9;
+}
+
+/* ===== 标签样式 ===== */
+.type-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.type-tag.video {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
+}
+.type-tag.text {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
